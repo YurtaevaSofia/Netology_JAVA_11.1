@@ -17,7 +17,7 @@ public class CartManager {
     }
 
     public PurchaseItem[] getAll() {
-        PurchaseItem[] result = new PurchaseItem[items.length];
+        PurchaseItem[] result = new PurchaseItem[10];
 
         for (int i = 0; i < 10; i++) {
             int index = items.length - i - 1;
