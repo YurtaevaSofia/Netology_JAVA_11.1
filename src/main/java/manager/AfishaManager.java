@@ -1,22 +1,22 @@
 package manager;
 
 import domain.PurchaseItem;
+import repository.AfishaRepository;
 
-public class CartManager {
-    private PurchaseItem[] items = new PurchaseItem[0];
+public class AfishaManager {
+    private AfishaRepository repository;
+
+    public AfishaManager(AfishaRepository repository) {
+        this.repository = repository;
+    }
 
     public void add(PurchaseItem item) {
 
-        int length = items.length + 1;
-        PurchaseItem[] tmp = new PurchaseItem[length];
-
-        System.arraycopy(items, 0, tmp, 0, items.length);
-        int lastIndex = tmp.length - 1;
-        tmp[lastIndex] = item;
-        items = tmp;
+        repository.save(item);
     }
 
     public PurchaseItem[] getAll() {
+        PurchaseItem[] items = repository.findAll();
         PurchaseItem[] result = new PurchaseItem[10];
 
         for (int i = 0; i < 10; i++) {
@@ -27,6 +27,8 @@ public class CartManager {
     }
 
     public PurchaseItem[] getAll(int numberOfItems) {
+
+        PurchaseItem[] items = repository.findAll();
         PurchaseItem[] result = new PurchaseItem[numberOfItems];
 
         for (int i = 0; i < numberOfItems; i++) {
@@ -34,6 +36,10 @@ public class CartManager {
             result[i] = items[index];
         }
         return result;
+    }
+
+    public void removeById (int id){
+        repository.removeById(id);
     }
 
 }

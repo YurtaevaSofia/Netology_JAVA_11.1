@@ -1,46 +1,48 @@
-import org.junit.jupiter.api.Test;
 import domain.PurchaseItem;
-import manager.CartManager;
+import manager.AfishaManager;
+import org.junit.jupiter.api.Test;
+import repository.AfishaRepository;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-public class CartManagerTest {
+public class AfishaRepositoryTest {
     @Test
     public void shouldAddWhenNotEmpty() {
-        CartManager manager = new CartManager();
+        AfishaRepository repository = new AfishaRepository();
 
         PurchaseItem first = new PurchaseItem(1, 1, "first", 1, 1);
         PurchaseItem second = new PurchaseItem(2, 2, "second", 1, 1);
         PurchaseItem third = new PurchaseItem(3, 3, "third", 1, 1);
         PurchaseItem forth = new PurchaseItem(4, 4, "forth", 4, 4);
-        manager.add(first);
-        manager.add(second);
-        manager.add(third);
+        repository.save(first);
+        repository.save(second);
+        repository.save(third);
 
-        PurchaseItem[] actual = manager.getAll(3);
-        PurchaseItem[] expected = new PurchaseItem[]{third, second, first};
+        PurchaseItem[] actual = repository.findAll();
+        PurchaseItem[] expected = new PurchaseItem[]{first, second, third};
         assertArrayEquals(expected, actual);
 
-        manager.add(forth);
+        repository.save(forth);
 
-        PurchaseItem[] actual2 = manager.getAll(4);
-        PurchaseItem[] expected2 = new PurchaseItem[]{forth, third, second, first};
+        PurchaseItem[] actual2 = repository.findAll();
+        PurchaseItem[] expected2 = new PurchaseItem[]{first, second, third, forth};
 
         assertArrayEquals(expected2, actual2);
     }
 
     @Test
     public void shouldGetThreeWhenNotEmpty() {
-        CartManager manager = new CartManager();
+        AfishaRepository repository = new AfishaRepository();
+        AfishaManager manager = new AfishaManager(repository);
 
         PurchaseItem first = new PurchaseItem(1, 1, "first", 1, 1);
         PurchaseItem second = new PurchaseItem(2, 2, "second", 1, 1);
         PurchaseItem third = new PurchaseItem(3, 3, "third", 1, 1);
         PurchaseItem forth = new PurchaseItem(4, 4, "forth", 4, 4);
-        manager.add(first);
-        manager.add(second);
-        manager.add(third);
-        manager.add(forth);
+        repository.save(first);
+        repository.save(second);
+        repository.save(third);
+        repository.save(forth);
 
 
         PurchaseItem[] actual = manager.getAll(3);
@@ -53,14 +55,15 @@ public class CartManagerTest {
 
     @Test
     public void shouldAddWhenEmpty() {
-        CartManager manager = new CartManager();
+        AfishaRepository repository = new AfishaRepository();
+
 
         PurchaseItem first = new PurchaseItem(1, 1, "first", 1, 1);
 
-        manager.add(first);
+        repository.save(first);
 
 
-        PurchaseItem[] actual = manager.getAll(1);
+        PurchaseItem[] actual = repository.findAll();
         PurchaseItem[] expected = new PurchaseItem[]{first};
 
         assertArrayEquals(expected, actual);
@@ -68,13 +71,13 @@ public class CartManagerTest {
 
     @Test
     public void shouldGetWhenWasEmpty() {
-        CartManager manager = new CartManager();
+        AfishaRepository repository = new AfishaRepository();
 
         PurchaseItem first = new PurchaseItem(1, 1, "first", 1, 1);
 
-        manager.add(first);
+        repository.save(first);
 
-        PurchaseItem[] actual = manager.getAll(1);
+        PurchaseItem[] actual = repository.findAll();
         PurchaseItem[] expected = new PurchaseItem[]{first};
 
 //    assertEquals(expected, actual);
@@ -83,7 +86,7 @@ public class CartManagerTest {
 
     @Test
     public void shouldGetTen() {
-        CartManager manager = new CartManager();
+        AfishaRepository repository = new AfishaRepository();
 
         PurchaseItem first = new PurchaseItem(1, 1, "first", 1, 1);
         PurchaseItem second = new PurchaseItem(2, 2, "second", 1, 1);
@@ -97,25 +100,25 @@ public class CartManagerTest {
         PurchaseItem ten = new PurchaseItem(10, 10, "ten", 1, 1);
         PurchaseItem eleven = new PurchaseItem(11, 11, "eleven", 1, 1);
         PurchaseItem twelve = new PurchaseItem(12, 12, "twelve", 1, 1);
-        manager.add(first);
-        manager.add(second);
-        manager.add(third);
-        manager.add(forth);
-        manager.add(fifth);
-        manager.add(six);
-        manager.add(sevens);
-        manager.add(eigth);
-        manager.add(nine);
-        manager.add(ten);
-        manager.add(eleven);
-        manager.add(twelve);
+        repository.save(first);
+        repository.save(second);
+        repository.save(third);
+        repository.save(forth);
+        repository.save(fifth);
+        repository.save(six);
+        repository.save(sevens);
+        repository.save(eigth);
+        repository.save(nine);
+        repository.save(ten);
+        repository.save(eleven);
+        repository.save(twelve);
 
-        PurchaseItem[] actual = manager.getAll();
-        PurchaseItem[] expected = new PurchaseItem[]{twelve ,eleven,ten, nine, eigth, sevens, six, fifth, forth, third};
+        PurchaseItem[] actual = repository.findAll();
+        PurchaseItem[] expected = new PurchaseItem[]{twelve, eleven, ten, nine, eigth, sevens, six, fifth, forth, third};
         assertArrayEquals(expected, actual);
 
 
     }
-
-
 }
+
+
