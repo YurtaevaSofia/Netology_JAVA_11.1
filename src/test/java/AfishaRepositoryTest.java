@@ -1,4 +1,4 @@
-import domain.PurchaseItem;
+import domain.Film;
 import manager.AfishaManager;
 import org.junit.jupiter.api.Test;
 import repository.AfishaRepository;
@@ -10,22 +10,22 @@ public class AfishaRepositoryTest {
     public void shouldAddWhenNotEmpty() {
         AfishaRepository repository = new AfishaRepository();
 
-        PurchaseItem first = new PurchaseItem(1, 1, "first", 1, 1);
-        PurchaseItem second = new PurchaseItem(2, 2, "second", 1, 1);
-        PurchaseItem third = new PurchaseItem(3, 3, "third", 1, 1);
-        PurchaseItem forth = new PurchaseItem(4, 4, "forth", 4, 4);
+        Film first = new Film(1, 1, "first", 1, 1);
+        Film second = new Film(2, 2, "second", 1, 1);
+        Film third = new Film(3, 3, "third", 1, 1);
+        Film forth = new Film(4, 4, "forth", 4, 4);
         repository.save(first);
         repository.save(second);
         repository.save(third);
 
-        PurchaseItem[] actual = repository.findAll();
-        PurchaseItem[] expected = new PurchaseItem[]{first, second, third};
+        Film[] actual = repository.findAll();
+        Film[] expected = new Film[]{first, second, third};
         assertArrayEquals(expected, actual);
 
         repository.save(forth);
 
-        PurchaseItem[] actual2 = repository.findAll();
-        PurchaseItem[] expected2 = new PurchaseItem[]{first, second, third, forth};
+        Film[] actual2 = repository.findAll();
+        Film[] expected2 = new Film[]{first, second, third, forth};
 
         assertArrayEquals(expected2, actual2);
     }
@@ -33,20 +33,20 @@ public class AfishaRepositoryTest {
     @Test
     public void shouldGetThreeWhenNotEmpty() {
         AfishaRepository repository = new AfishaRepository();
-        AfishaManager manager = new AfishaManager(repository);
+        AfishaManager manager = new AfishaManager(repository, 3);
 
-        PurchaseItem first = new PurchaseItem(1, 1, "first", 1, 1);
-        PurchaseItem second = new PurchaseItem(2, 2, "second", 1, 1);
-        PurchaseItem third = new PurchaseItem(3, 3, "third", 1, 1);
-        PurchaseItem forth = new PurchaseItem(4, 4, "forth", 4, 4);
+        Film first = new Film(1, 1, "first", 1, 1);
+        Film second = new Film(2, 2, "second", 1, 1);
+        Film third = new Film(3, 3, "third", 1, 1);
+        Film forth = new Film(4, 4, "forth", 4, 4);
         repository.save(first);
         repository.save(second);
         repository.save(third);
         repository.save(forth);
 
 
-        PurchaseItem[] actual = manager.getAll(3);
-        PurchaseItem[] expected = new PurchaseItem[]{forth, third, second};
+        Film[] actual = manager.getAll();
+        Film[] expected = new Film[]{forth, third, second};
 
 //    assertEquals(expected, actual);
         assertArrayEquals(expected, actual);
@@ -58,13 +58,13 @@ public class AfishaRepositoryTest {
         AfishaRepository repository = new AfishaRepository();
 
 
-        PurchaseItem first = new PurchaseItem(1, 1, "first", 1, 1);
+        Film first = new Film(1, 1, "first", 1, 1);
 
         repository.save(first);
 
 
-        PurchaseItem[] actual = repository.findAll();
-        PurchaseItem[] expected = new PurchaseItem[]{first};
+        Film[] actual = repository.findAll();
+        Film[] expected = new Film[]{first};
 
         assertArrayEquals(expected, actual);
     }
@@ -73,12 +73,12 @@ public class AfishaRepositoryTest {
     public void shouldGetWhenWasEmpty() {
         AfishaRepository repository = new AfishaRepository();
 
-        PurchaseItem first = new PurchaseItem(1, 1, "first", 1, 1);
+        Film first = new Film(1, 1, "first", 1, 1);
 
         repository.save(first);
 
-        PurchaseItem[] actual = repository.findAll();
-        PurchaseItem[] expected = new PurchaseItem[]{first};
+        Film[] actual = repository.findAll();
+        Film[] expected = new Film[]{first};
 
 //    assertEquals(expected, actual);
         assertArrayEquals(expected, actual);
@@ -88,18 +88,18 @@ public class AfishaRepositoryTest {
     public void shouldGetTen() {
         AfishaRepository repository = new AfishaRepository();
 
-        PurchaseItem first = new PurchaseItem(1, 1, "first", 1, 1);
-        PurchaseItem second = new PurchaseItem(2, 2, "second", 1, 1);
-        PurchaseItem third = new PurchaseItem(3, 3, "third", 1, 1);
-        PurchaseItem forth = new PurchaseItem(4, 4, "forth", 4, 4);
-        PurchaseItem fifth = new PurchaseItem(5, 5, "fifth", 1, 1);
-        PurchaseItem six = new PurchaseItem(6, 6, "six", 1, 1);
-        PurchaseItem sevens = new PurchaseItem(7, 7, "sevens", 1, 1);
-        PurchaseItem eigth = new PurchaseItem(8, 8, "eight", 1, 1);
-        PurchaseItem nine = new PurchaseItem(9, 9, "nine", 4, 4);
-        PurchaseItem ten = new PurchaseItem(10, 10, "ten", 1, 1);
-        PurchaseItem eleven = new PurchaseItem(11, 11, "eleven", 1, 1);
-        PurchaseItem twelve = new PurchaseItem(12, 12, "twelve", 1, 1);
+        Film first = new Film(1, 1, "first", 1, 1);
+        Film second = new Film(2, 2, "second", 1, 1);
+        Film third = new Film(3, 3, "third", 1, 1);
+        Film forth = new Film(4, 4, "forth", 4, 4);
+        Film fifth = new Film(5, 5, "fifth", 1, 1);
+        Film six = new Film(6, 6, "six", 1, 1);
+        Film sevens = new Film(7, 7, "sevens", 1, 1);
+        Film eigth = new Film(8, 8, "eight", 1, 1);
+        Film nine = new Film(9, 9, "nine", 4, 4);
+        Film ten = new Film(10, 10, "ten", 1, 1);
+        Film eleven = new Film(11, 11, "eleven", 1, 1);
+        Film twelve = new Film(12, 12, "twelve", 1, 1);
         repository.save(first);
         repository.save(second);
         repository.save(third);
@@ -113,8 +113,8 @@ public class AfishaRepositoryTest {
         repository.save(eleven);
         repository.save(twelve);
 
-        PurchaseItem[] actual = repository.findAll();
-        PurchaseItem[] expected = new PurchaseItem[]{twelve, eleven, ten, nine, eigth, sevens, six, fifth, forth, third};
+        Film[] actual = repository.findAll();
+        Film[] expected = new Film[]{twelve, eleven, ten, nine, eigth, sevens, six, fifth, forth, third};
         assertArrayEquals(expected, actual);
 
 

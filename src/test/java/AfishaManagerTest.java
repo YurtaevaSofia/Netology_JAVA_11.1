@@ -1,4 +1,4 @@
-import domain.PurchaseItem;
+import domain.Film;
 import manager.AfishaManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,13 +14,13 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class AfishaManagerTest {
     @Mock
-    AfishaRepository repository = mock(AfishaRepository.class);
+    AfishaRepository repository;
     @InjectMocks
     AfishaManager manager;
 
-    private PurchaseItem first = new PurchaseItem(1, 1, "first", 1, 1);
-    private PurchaseItem second = new PurchaseItem(2, 2, "second", 1, 1);
-    private PurchaseItem third = new PurchaseItem(3, 3, "third", 1, 1);
+    private Film first = new Film(1, 1, "first", 1, 1);
+    private Film second = new Film(2, 2, "second", 1, 1);
+    private Film third = new Film(3, 3, "third", 1, 1);
 
     @BeforeEach
     public void setUp() {
@@ -34,13 +34,13 @@ public class AfishaManagerTest {
     public void shouldRemoveIfExists() {
         int idToRemove = 1;
 
-        PurchaseItem[] returned = new PurchaseItem[]{second, third};
+        Film[] returned = new Film[]{second, third};
         doReturn(returned).when(repository).findAll();
         doNothing().when(repository).removeById(idToRemove);
 
         repository.removeById(idToRemove);
-        PurchaseItem[] expected = new PurchaseItem[]{second, third};
-        PurchaseItem[] actual = repository.findAll();
+        Film[] expected = new Film[]{second, third};
+        Film[] actual = repository.findAll();
         assertArrayEquals(expected, actual);
 
         verify(repository).removeById(idToRemove);
@@ -49,13 +49,13 @@ public class AfishaManagerTest {
     @Test
     public void shouldNotRemoveIfNotExists() {
         int idToRemove = 4;
-        PurchaseItem[] returned = new PurchaseItem[]{first, second, third};
+        Film[] returned = new Film[]{first, second, third};
         doReturn(returned).when(repository).findAll();
         doNothing().when(repository).removeById(idToRemove);
 
         repository.removeById(idToRemove);
-        PurchaseItem[] expected = new PurchaseItem[]{first, second, third};
-        PurchaseItem[] actual = repository.findAll();
+        Film[] expected = new Film[]{first, second, third};
+        Film[] actual = repository.findAll();
 
         assertArrayEquals(expected, actual);
 
