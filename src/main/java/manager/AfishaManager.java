@@ -42,7 +42,13 @@ public class AfishaManager {
         }
         return result;
         }
-        else return items;
+        else {
+            for (int i = 0; i < items.length; i++) {
+                int index = items.length - i - 1;
+                result[i] = items[index];
+            }
+            return result;
+        }
     }
 
     public void removeById (int id){
